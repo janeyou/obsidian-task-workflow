@@ -175,9 +175,13 @@ All sorted by `done reverse`, grouped by `done` then `folder`.
 
 IMPORTANT: Use `7 days ago` / `30 days ago` for relative dates — NOT `today -7 days` (that syntax doesn't work).
 
-### Step 7: Theme and Appearance (Optional)
+### Step 7: Theme and Appearance (Optional — for new Obsidian users)
 
-Ask the user if they want the recommended look:
+**IMPORTANT**: Skip this step entirely if the user already has a theme, appearance settings, or plugins they like. Only offer this to users setting up Obsidian for the first time.
+
+Ask the user: "Would you like me to set up a recommended theme and appearance? This is optional — skip if you already have your Obsidian looking the way you want."
+
+If yes:
 
 ```
 obsidian theme:install name="Things"
@@ -201,9 +205,10 @@ sorting-spec: |-
 
 Then tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**. List items by name without `.md` extension — files and folders mix together in the specified order.
 
-Then update `<vault>/.obsidian/app.json` to set:
+Optionally update `<vault>/.obsidian/app.json` to set:
 - `showInlineTitle`: false
-- `zoomLevel`: -0.263 (83%)
+
+For zoom, tell the user to use `Cmd + -` / `Cmd + +` in Obsidian to adjust to their preference (83% is a good starting point for compact layouts).
 
 ### Step 8: Reload and Open
 

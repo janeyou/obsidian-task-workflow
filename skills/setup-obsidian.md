@@ -185,7 +185,7 @@ Present all four options at once. **Default is No for all** — the user opts in
 |--------|-------------|---------|
 | **a. Things theme** | Clean, task-focused theme + Style Settings plugin for customization | No |
 | **b. Hide inline title** | Removes the large title at the top of each note, saves vertical space | No |
-| **c. Zoom to 83%** | Tighter, more compact layout | No |
+| **c. Compact zoom (83%)** | Reset zoom to 83% for a more compact task list view | No |
 | **d. Custom sidebar sort** | Pin Inbox, Completed, Daily Notes to the top of the sidebar | No |
 
 Apply only what the user selects:
@@ -200,8 +200,15 @@ obsidian plugin:install id=obsidian-style-settings enable
 **If b (hide inline title):**
 Update `<vault>/.obsidian/app.json` to set `showInlineTitle`: false
 
-**If c (zoom):**
-Tell the user to press `Cmd + -` (Mac) or `Ctrl + -` (Windows) a few times in Obsidian until the zoom shows ~83%. This can't be set via config reliably — it's a quick manual step.
+**If c (compact zoom):**
+Reset zoom to 83% for a more compact task list view. First reset to default, then zoom out 3 times:
+```
+obsidian command id="window:reset-zoom"
+obsidian command id="window:zoom-out"
+obsidian command id="window:zoom-out"
+obsidian command id="window:zoom-out"
+```
+To adjust later: `Cmd + -` / `Cmd + +` to zoom, `Cmd + 0` to reset.
 
 **If d (sidebar sort):**
 ```
@@ -225,7 +232,7 @@ Tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**.
 > Skipped some options? You can apply them anytime:
 > - **Theme**: Settings > Appearance > Themes > Manage > search "Things"
 > - **Hide inline title**: Settings > Appearance > toggle off "Show inline title"
-> - **Zoom**: `Cmd + -` / `Cmd + +` to adjust, `Cmd + 0` to reset
+> - **Compact zoom**: `Cmd + -` to zoom out (3 times for ~83%), `Cmd + 0` to reset
 > - **Sidebar sort**: Install "Custom Sort" plugin (Settings > Community plugins > Browse), then create `sortspec.md` in your vault root
 
 ### Step 8: Reload and Open

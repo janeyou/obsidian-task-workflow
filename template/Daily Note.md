@@ -9,6 +9,7 @@ not done
 due on {{date}}
 status.name does not include Pending
 sort by priority
+short mode
 ```
 
 ## Pending (waiting on others)
@@ -16,6 +17,7 @@ sort by priority
 status.name includes Pending
 sort by priority
 group by folder
+short mode
 ```
 
 ## Overdue
@@ -24,6 +26,7 @@ not done
 due before {{date}}
 sort by priority
 group by folder
+short mode
 ```
 
 ## Quick Capture
@@ -38,6 +41,7 @@ done
 done on {{date}}
 sort by done reverse
 group by folder
+short mode
 ```
 
 ---

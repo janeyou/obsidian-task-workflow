@@ -21,14 +21,14 @@ template/
 Tasks live **where they originate** -- meeting notes, project docs, 1:1 follow-ups. Your daily note uses live query blocks (via the [Tasks plugin](https://publish.obsidian.md/tasks/)) to pull them in automatically. Checking off a task in the daily view updates the original file.
 
 ```
-Meeting Notes       Project Docs       Inbox (quick capture)
+Meeting Notes       Project Docs       Inbox (quick capture + upcoming)
       \                  |                  /
        \                 |                 /
         v                v                v
-          Daily Note (auto-queries all tasks)
-          - Due Today / Overdue / Tomorrow
-          - This Week / Next Week / Future
-          - Pending / No Due Date
+          Daily Note — focused on today          Inbox — planning ahead
+          - Due Today / Overdue                  - Tomorrow / This Week
+          - Pending / Completed          <——>    - Next Week / Future
+                                                 - No Due Date
 ```
 
 ## Quick Start

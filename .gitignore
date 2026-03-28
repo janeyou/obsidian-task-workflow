@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Obsidian
+.obsidian/
+
+# Personal content
+Twitter Thread Drafts*.md
+
+# Claude Code
+.claude/

@@ -23,7 +23,7 @@ Surface today's tasks, open the daily note, and optionally add new items.
    - **Overdue** — tasks with due dates before today (show the due date and source file)
    - **Due Today** — tasks due today
 
-   Upcoming tasks (Tomorrow, This Week, Next Week, Future, No Due Date) live in **Inbox.md** — mention this if the user asks about future tasks.
+   Upcoming tasks (Tomorrow, This Week, Next Week, Future, No Due Date) live in **Inbox.md** — the Today section there links to the daily note. Mention Inbox if the user asks about future tasks.
 
 4. **Present a summary** to the user:
    - Count of overdue / due today
@@ -64,3 +64,4 @@ Always use the Obsidian Tasks plugin emoji format:
 | Date | Change |
 |------|--------|
 | 2026-03-28 | Moved Tomorrow/This Week/Next Week/Future/No Due Date from daily note to Inbox.md; daily note now links back to Inbox; added Today section in Inbox linking to daily note |
+| 2026-03-28 | Removed redundant Today task query from Inbox — Today section is just a link to the daily note |

@@ -138,9 +138,12 @@ Write to `<vault>/.obsidian/daily-notes.json`:
 ```json
 {
   "format": "YYYY-MM-DD",
+  "folder": "Daily Notes",
   "template": "Templates/Daily Note"
 }
 ```
+
+Create the `Daily Notes/` folder in the vault if it doesn't exist.
 
 Write to `<vault>/.obsidian/templates.json`:
 
@@ -163,7 +166,28 @@ Quick capture space for tasks, thoughts, and ideas. Process these during your da
 
 ```
 
-### Step 6: Create Completed View
+### Step 6: Create Pending View
+
+Create `Pending.md` in the vault root — a bird's-eye view of all tasks waiting on others:
+
+```markdown
+# Pending
+
+Tasks waiting on others — marked with `- [?]` across the vault.
+
+---
+
+## All Pending
+` ` `tasks
+status.name includes Pending
+sort by due
+group by folder
+` ` `
+```
+
+IMPORTANT: Write backticks as proper triple backticks (```), not with spaces.
+
+### Step 6b: Create Completed View
 
 Create `Completed.md` in the vault root with task queries for:
 - **This Week**: `done` + `done after 7 days ago`
@@ -223,7 +247,9 @@ To adjust later: `Cmd + -` / `Cmd + +` to zoom, `Cmd + 0` to reset.
    sorting-spec: |-
      target-folder: /
      Inbox
+     Pending
      Completed
+     Daily Notes
      Templates
      (list remaining folders/files by name, no .md extension)
    ---

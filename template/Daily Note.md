@@ -40,42 +40,6 @@ sort by done reverse
 group by folder
 ```
 
-## Tomorrow
-```tasks
-not done
-due on tomorrow
-sort by priority
-group by folder
-```
+---
 
-## This Week
-```tasks
-not done
-filter by function !!(task.due.moment?.isAfter(moment().add(1, 'day'), 'day') && task.due.moment?.isSameOrBefore(moment().endOf('isoWeek'), 'day'))
-sort by priority
-group by folder
-```
-
-## Next Week
-```tasks
-not done
-filter by function !!(task.due.moment?.isAfter(moment().endOf('isoWeek'), 'day') && task.due.moment?.isSameOrBefore(moment().add(1, 'week').endOf('isoWeek'), 'day'))
-sort by priority
-group by folder
-```
-
-## Future
-```tasks
-not done
-filter by function !!task.due.moment?.isAfter(moment().add(1, 'week').endOf('isoWeek'), 'day')
-sort by due
-group by folder
-```
-
-## No Due Date
-```tasks
-not done
-no due date
-sort by path
-group by folder
-```
+→ [[Inbox]] — Tomorrow / This Week / Next Week / Future / No Due Date

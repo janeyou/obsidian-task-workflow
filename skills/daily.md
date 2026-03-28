@@ -22,13 +22,13 @@ Surface today's tasks, open the daily note, and optionally add new items.
    Filter and present tasks in this order:
    - **Overdue** — tasks with due dates before today (show the due date and source file)
    - **Due Today** — tasks due today
-   - **Due This Week** — tasks due in the next 7 days
-   - **No Due Date** — remaining open tasks (show source file for context)
+
+   Upcoming tasks (Tomorrow, This Week, Next Week, Future, No Due Date) live in **Inbox.md** — mention this if the user asks about future tasks.
 
 4. **Present a summary** to the user:
-   - Count of overdue / due today / due this week / no date
+   - Count of overdue / due today
    - List the tasks grouped as above, with source file links
-   - Ask if the user wants to: (a) add new tasks, (b) mark tasks done, (c) open the daily note in Obsidian
+   - Ask if the user wants to: (a) add new tasks, (b) mark tasks done, (c) open the daily note in Obsidian, (d) open Inbox for upcoming tasks
 
 5. **Adding new tasks**: When the user wants to add a task:
    - Ask what it is and when it's due (default: today)
@@ -52,6 +52,15 @@ Always use the Obsidian Tasks plugin emoji format:
 ## Tips
 
 - Tasks live at their source (meeting notes, 1:1 follow-ups, project docs) — never duplicate them
-- The daily note in Obsidian shows live query results pulling from all files
+- The daily note focuses on today: Due Today, Overdue, Pending, Completed
+- Upcoming views (Tomorrow → Future → No Due Date) live in Inbox.md — one place for planning ahead
+- The daily note links to Inbox at the bottom for quick navigation
 - Use Inbox.md for quick standalone captures
 - The user can also add tasks directly via: `obsidian daily:append content="- [ ] task 📅 date"`
+- When a new day starts, update the Today section link in Inbox.md to `[[Daily Notes/YYYY-MM-DD]]`
+
+## Changelog
+
+| Date | Change |
+|------|--------|
+| 2026-03-28 | Moved Tomorrow/This Week/Next Week/Future/No Due Date from daily note to Inbox.md; daily note now links back to Inbox; added Today section in Inbox linking to daily note |

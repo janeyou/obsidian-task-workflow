@@ -143,7 +143,7 @@ Write to `<vault>/.obsidian/daily-notes.json`:
 }
 ```
 
-Create the `Daily Notes/` folder in the vault if it doesn't exist.
+Create the `Daily Notes/` folder in the vault if it doesn't exist. After writing this config, run `obsidian reload` so Obsidian picks up the folder setting — otherwise the daily note icon will create notes in the vault root.
 
 Write to `<vault>/.obsidian/templates.json`:
 
@@ -241,7 +241,7 @@ To adjust later: `Cmd + -` / `Cmd + +` to zoom, `Cmd + 0` to reset.
    obsidian plugin:install id=custom-sort enable
    ```
 
-2. List the user's existing vault folders (use `obsidian folders`) and create a `sortspec.md` in the vault root with all folders/files in a sensible order — pin Inbox, Completed, and Templates near the top:
+2. List the user's existing vault folders (use `obsidian folders`) and create a `sortspec.md` in the vault root with all folders/files in a sensible order — pin Inbox, Pending, Completed, and Daily Notes near the top, Templates at the bottom:
    ```yaml
    ---
    sorting-spec: |-
@@ -250,8 +250,8 @@ To adjust later: `Cmd + -` / `Cmd + +` to zoom, `Cmd + 0` to reset.
      Pending
      Completed
      Daily Notes
-     Templates
      (list remaining folders/files by name, no .md extension)
+     Templates
    ---
    ```
 

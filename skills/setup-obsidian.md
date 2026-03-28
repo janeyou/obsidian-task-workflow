@@ -175,22 +175,35 @@ All sorted by `done reverse`, grouped by `done` then `folder`.
 
 IMPORTANT: Use `7 days ago` / `30 days ago` for relative dates — NOT `today -7 days` (that syntax doesn't work).
 
-### Step 7: Theme and Appearance (Optional — for new Obsidian users)
+### Step 7: Theme and Appearance (Optional)
 
-**IMPORTANT**: Skip this step entirely if the user already has a theme, appearance settings, or plugins they like. Only offer this to users setting up Obsidian for the first time.
+This step is entirely optional. Ask the user each question individually — they can say yes or no to each one. If the user says they're happy with their current setup, skip all of them.
 
-Ask the user: "Would you like me to set up a recommended theme and appearance? This is optional — skip if you already have your Obsidian looking the way you want."
+**7a. Theme** — "Would you like to install the Things theme? It's a clean, task-focused theme that pairs well with this workflow. Skip if you already have a theme you like."
 
 If yes:
-
 ```
 obsidian theme:install name="Things"
 obsidian theme:set name="Things"
 obsidian plugin:install id=obsidian-style-settings enable
+```
+The Style Settings plugin gives a GUI to customize the theme (Settings > Style Settings > Things Theme).
+
+**7b. Compact layout** — "Would you like a more compact layout? This hides the inline title and frees up vertical space. You can also zoom to ~83% with Cmd + - for a tighter feel."
+
+If yes, update `<vault>/.obsidian/app.json` to set:
+- `showInlineTitle`: false
+
+For zoom, tell the user to press `Cmd + -` a few times in Obsidian to reach ~83% (this can't be set via config reliably).
+
+**7c. Custom sidebar sorting** — "Would you like to customize your sidebar order? This lets you put Inbox, Completed, and Daily Notes at the top instead of alphabetical."
+
+If yes:
+```
 obsidian plugin:install id=custom-sort enable
 ```
 
-After installing Custom Sort, create a `sortspec.md` in the vault root with YAML frontmatter defining the sidebar order:
+Then create a `sortspec.md` in the vault root with YAML frontmatter defining the sidebar order:
 
 ```yaml
 ---
@@ -204,11 +217,6 @@ sorting-spec: |-
 ```
 
 Then tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**. List items by name without `.md` extension — files and folders mix together in the specified order.
-
-Optionally update `<vault>/.obsidian/app.json` to set:
-- `showInlineTitle`: false
-
-For zoom, tell the user to use `Cmd + -` / `Cmd + +` in Obsidian to adjust to their preference (83% is a good starting point for compact layouts).
 
 ### Step 8: Reload and Open
 

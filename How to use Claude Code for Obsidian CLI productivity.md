@@ -184,7 +184,7 @@ A few tweaks to make Obsidian feel more like an IDE — compact, clean, fast:
 
 Install the **Style Settings** plugin to get a GUI for tweaking the Things theme — colors, heading styles, checkbox styles, etc. Go to **Settings > Style Settings > Things Theme** after installing.
 
-**Custom folder sorting**: Install the **Custom Sort** plugin (`obsidian plugin:install id=custom-sort enable`) to define your own sidebar order. Create a `sortspec.md` in the vault root with a `sorting-spec` YAML frontmatter listing items by name (without `.md`). Then `Cmd+P` > "Custom Sort: Enable custom sorting". Files and folders mix together in your specified order. Alternatively, prefix folders with numbers (`01 Projects`, `02 People`) for a no-plugin approach.
+**Custom folder sorting**: Install the **Custom Sort** plugin (`obsidian plugin:install id=custom-sort enable`) to define your own sidebar order. Create a `sortspec.md` in the vault root with a `sorting-spec` YAML frontmatter listing items by name (without `.md`). Then `Cmd+P` > type "custom s" > select "Custom File Explorer sorting: Enable and apply the custom sorting... Sort-on." Files and folders mix together in your specified order. Alternatively, prefix folders with numbers (`01 Projects`, `02 People`) for a no-plugin approach.
 
 Or via CLI:
 ```bash

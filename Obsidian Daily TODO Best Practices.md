@@ -178,7 +178,7 @@ sorting-spec: |-
 ---
 ```
 
-4. `Cmd+P` > **"Custom Sort: Enable custom sorting"**
+4. `Cmd+P` > type "custom s" > select **"Custom File Explorer sorting: Enable and apply the custom sorting... Sort-on."**
 
 List folders and files by name (without `.md` extension) in the order you want. Files and folders are mixed together — no more files stuck at the bottom.
 

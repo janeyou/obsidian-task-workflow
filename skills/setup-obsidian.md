@@ -211,21 +211,27 @@ obsidian command id="window:zoom-out"
 To adjust later: `Cmd + -` / `Cmd + +` to zoom, `Cmd + 0` to reset.
 
 **If d (sidebar sort):**
-```
-obsidian plugin:install id=custom-sort enable
-```
-Then create a `sortspec.md` in the vault root:
-```yaml
----
-sorting-spec: |-
-  target-folder: /
-  Inbox
-  Completed
-  Daily Notes
-  (list remaining folders/files by name, no .md extension)
----
-```
-Tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**.
+
+1. Install the plugin:
+   ```
+   obsidian plugin:install id=custom-sort enable
+   ```
+
+2. List the user's existing vault folders (use `obsidian folders`) and create a `sortspec.md` in the vault root with all folders/files in a sensible order — pin Inbox, Completed, and Templates near the top:
+   ```yaml
+   ---
+   sorting-spec: |-
+     target-folder: /
+     Inbox
+     Completed
+     Templates
+     (list remaining folders/files by name, no .md extension)
+   ---
+   ```
+
+3. Tell the user to activate it: `Cmd+P` > type "custom s" > select **"Custom File Explorer sorting: Enable and apply the custom sorting, (re)parsing the sorting configuration first. Sort-on."**
+
+4. Reload the vault: `obsidian reload`
 
 **After presenting results, always include this "do it later" note:**
 
@@ -233,7 +239,7 @@ Tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**.
 > - **Theme**: Settings > Appearance > Themes > Manage > search "Things"
 > - **Hide inline title**: Settings > Appearance > toggle off "Show inline title"
 > - **Compact zoom**: `Cmd + -` to zoom out (3 times for ~83%), `Cmd + 0` to reset
-> - **Sidebar sort**: Install "Custom Sort" plugin (Settings > Community plugins > Browse), then create `sortspec.md` in your vault root
+> - **Sidebar sort**: Install "Custom Sort" plugin (Settings > Community plugins > Browse), create `sortspec.md` in your vault root listing folders in your preferred order, then `Cmd+P` > "custom s" > select "Custom File Explorer sorting: Enable and apply the custom sorting... Sort-on."
 
 ### Step 8: Reload and Open
 

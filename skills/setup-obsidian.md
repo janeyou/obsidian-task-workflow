@@ -177,34 +177,37 @@ IMPORTANT: Use `7 days ago` / `30 days ago` for relative dates — NOT `today -7
 
 ### Step 7: Theme and Appearance (Optional)
 
-This step is entirely optional. Ask the user each question individually — they can say yes or no to each one. If the user says they're happy with their current setup, skip all of them.
+Present all four options at once. **Default is No for all** — the user opts in to what they want. Say something like:
 
-**7a. Theme** — "Would you like to install the Things theme? It's a clean, task-focused theme that pairs well with this workflow. Skip if you already have a theme you like."
+"Your task workflow is fully set up! There are a few optional appearance tweaks you can apply now or do later. All default to **No** — pick any you'd like:"
 
-If yes:
+| Option | What it does | Default |
+|--------|-------------|---------|
+| **a. Things theme** | Clean, task-focused theme + Style Settings plugin for customization | No |
+| **b. Hide inline title** | Removes the large title at the top of each note, saves vertical space | No |
+| **c. Zoom to 83%** | Tighter, more compact layout | No |
+| **d. Custom sidebar sort** | Pin Inbox, Completed, Daily Notes to the top of the sidebar | No |
+
+Apply only what the user selects:
+
+**If a (theme):**
 ```
 obsidian theme:install name="Things"
 obsidian theme:set name="Things"
 obsidian plugin:install id=obsidian-style-settings enable
 ```
-The Style Settings plugin gives a GUI to customize the theme (Settings > Style Settings > Things Theme).
 
-**7b. Compact layout** — "Would you like a more compact layout? This hides the inline title and frees up vertical space. You can also zoom to ~83% with Cmd + - for a tighter feel."
+**If b (hide inline title):**
+Update `<vault>/.obsidian/app.json` to set `showInlineTitle`: false
 
-If yes, update `<vault>/.obsidian/app.json` to set:
-- `showInlineTitle`: false
+**If c (zoom):**
+Tell the user to press `Cmd + -` (Mac) or `Ctrl + -` (Windows) a few times in Obsidian until the zoom shows ~83%. This can't be set via config reliably — it's a quick manual step.
 
-For zoom, tell the user to press `Cmd + -` a few times in Obsidian to reach ~83% (this can't be set via config reliably).
-
-**7c. Custom sidebar sorting** — "Would you like to customize your sidebar order? This lets you put Inbox, Completed, and Daily Notes at the top instead of alphabetical."
-
-If yes:
+**If d (sidebar sort):**
 ```
 obsidian plugin:install id=custom-sort enable
 ```
-
-Then create a `sortspec.md` in the vault root with YAML frontmatter defining the sidebar order:
-
+Then create a `sortspec.md` in the vault root:
 ```yaml
 ---
 sorting-spec: |-
@@ -215,8 +218,15 @@ sorting-spec: |-
   (list remaining folders/files by name, no .md extension)
 ---
 ```
+Tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**.
 
-Then tell the user to run `Cmd+P` > **"Custom Sort: Enable custom sorting"**. List items by name without `.md` extension — files and folders mix together in the specified order.
+**After presenting results, always include this "do it later" note:**
+
+> Skipped some options? You can apply them anytime:
+> - **Theme**: Settings > Appearance > Themes > Manage > search "Things"
+> - **Hide inline title**: Settings > Appearance > toggle off "Show inline title"
+> - **Zoom**: `Cmd + -` / `Cmd + +` to adjust, `Cmd + 0` to reset
+> - **Sidebar sort**: Install "Custom Sort" plugin (Settings > Community plugins > Browse), then create `sortspec.md` in your vault root
 
 ### Step 8: Reload and Open
 

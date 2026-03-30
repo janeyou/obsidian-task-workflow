@@ -59,6 +59,10 @@ Always use the Obsidian Tasks plugin emoji format:
 - The user can also add tasks directly via: `obsidian daily:append content="- [ ] task 📅 date"`
 - When a new day starts, update the Today section link in Inbox.md to `[[Daily Notes/YYYY-MM-DD]]`
 
+## Folder Filtering
+
+Some folders contain grab-and-go checklists (e.g., packing lists in Travel/) that shouldn't clutter daily task views. These are excluded from Inbox's "No Due Date" query using `path does not include`. Actionable folders (Life/, Blogging/, Projects/) surface all tasks. Check the vault's `CLAUDE.md` for the current filtering rules.
+
 ## Changelog
 
 | Date | Change |

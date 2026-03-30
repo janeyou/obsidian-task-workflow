@@ -74,20 +74,30 @@ Add these emoji annotations to any task to make it queryable:
 
 ### The Daily Note Template
 
-Located at `Templates/Daily Note.md`. The layout (top to bottom):
+Located at `Templates/Daily Note.md`. The daily note focuses on **today**:
 
 1. **Focus** — manually write your top 1-3 priorities
-2. **Due Today** — auto-query: tasks with `📅` matching today's date (excludes pending, sorted by priority, no folder grouping)
+2. **Due Today** — auto-query: tasks with `📅` matching today's date (excludes pending, sorted by priority)
 3. **Pending** — auto-query: tasks marked as waiting on others (`- [?]` checkbox)
 4. **Overdue** — auto-query: tasks with `📅` before today
 5. **Quick Capture** — editable space for new tasks and thoughts
 6. **Notes** — freeform area
 7. **Completed Today** — auto-query: tasks checked off today
-8. **Tomorrow** — auto-query: tasks due tomorrow
-9. **This Week** — auto-query: tasks due in the next 2-6 days
-10. **Next Week** — auto-query: tasks due in 7-13 days
-11. **Future** — auto-query: tasks due 14+ days out
-12. **No Due Date** — auto-query: open tasks without a due date
+8. **Link to Inbox** — for planning ahead
+
+### Inbox.md
+
+Located at the vault root. Inbox handles forward-planning views that don't belong in the daily note:
+
+1. **Quick capture** — tasks, thoughts, ideas at the top
+2. **Today** — link back to the current daily note
+3. **Tomorrow / This Week / Next Week / Future** — auto-queries for upcoming tasks by time horizon
+4. **No Due Date** — open tasks without a `📅` date, grouped by folder
+5. **Ideas** — longer-term ideas section at the bottom
+
+The daily note and Inbox link to each other — the daily note has a `→ [[Inbox]]` link at the bottom, and Inbox has a `→ [[Daily Notes/YYYY-MM-DD]]` link in its Today section.
+
+**Folder filtering:** If your vault has folders with grab-and-go checklists (e.g., packing lists), add `path does not include FolderName` to the "No Due Date" query in Inbox to keep them from cluttering the view.
 
 To mark a task as pending (waiting on someone), change `- [ ]` to `- [?]` — type `?` inside the brackets, or right-click the checkbox and select "Pending." It moves from "Due Today" into the "Pending" section.
 
@@ -136,7 +146,7 @@ Open the daily note, scroll to Quick Capture, and type your task with a `📅 YY
 
 #### End of day: Review
 
-Open the daily note — check off what's done and they'll appear in the **Completed Today** section. Scroll down for a time-based breakdown: Tomorrow, This Week, Next Week, Future, and No Due Date. Check off tasks in Obsidian (click the checkbox) or via CLI:
+Open the daily note — check off what's done and they'll appear in the **Completed Today** section. Open **Inbox.md** for a time-based breakdown: Tomorrow, This Week, Next Week, Future, and No Due Date. Check off tasks in Obsidian (click the checkbox) or via CLI:
 ```bash
 obsidian task path="Meetings/Weekly Standup.md" line=12 done
 ```

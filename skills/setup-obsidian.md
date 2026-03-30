@@ -57,6 +57,7 @@ not done
 due on {{date}}
 status.name does not include Pending
 sort by priority
+short mode
 ` ` `
 
 ## Pending (waiting on others)
@@ -64,6 +65,7 @@ sort by priority
 status.name includes Pending
 sort by priority
 group by folder
+short mode
 ` ` `
 
 ## Overdue
@@ -72,6 +74,7 @@ not done
 due before {{date}}
 sort by priority
 group by folder
+short mode
 ` ` `
 
 ## Quick Capture
@@ -86,50 +89,17 @@ done
 done on {{date}}
 sort by done reverse
 group by folder
+short mode
 ` ` `
 
-## Tomorrow
-` ` `tasks
-not done
-due on tomorrow
-sort by priority
-group by folder
-` ` `
+---
 
-## This Week
-` ` `tasks
-not done
-filter by function !!(task.due.moment?.isAfter(moment().add(1, 'day'), 'day') && task.due.moment?.isSameOrBefore(moment().endOf('isoWeek'), 'day'))
-sort by priority
-group by folder
-` ` `
-
-## Next Week
-` ` `tasks
-not done
-filter by function !!(task.due.moment?.isAfter(moment().endOf('isoWeek'), 'day') && task.due.moment?.isSameOrBefore(moment().add(1, 'week').endOf('isoWeek'), 'day'))
-sort by priority
-group by folder
-` ` `
-
-## Future
-` ` `tasks
-not done
-filter by function !!task.due.moment?.isAfter(moment().add(1, 'week').endOf('isoWeek'), 'day')
-sort by due
-group by folder
-` ` `
-
-## No Due Date
-` ` `tasks
-not done
-no due date
-sort by path
-group by folder
-` ` `
+→ [[Inbox]] — Tomorrow / This Week / Next Week / Future / No Due Date
 ```
 
 IMPORTANT: The backticks above are shown with spaces for escaping — write them as proper triple backticks (```) in the actual file.
+
+The daily note focuses on **today**: Due, Overdue, Pending, Completed. Planning-ahead views (Tomorrow, This Week, Next Week, Future, No Due Date) live in **Inbox.md** — one place for triage and forward planning.
 
 ### Step 4: Configure Daily Notes
 
@@ -155,7 +125,7 @@ Write to `<vault>/.obsidian/templates.json`:
 
 ### Step 5: Create Inbox
 
-Create `Inbox.md` in the vault root:
+Create `Inbox.md` in the vault root. Inbox serves two purposes: quick capture at the top, and upcoming task views below. The daily note links here for forward planning.
 
 ```markdown
 # Inbox
@@ -164,7 +134,62 @@ Quick capture space for tasks, thoughts, and ideas. Process these during your da
 
 ---
 
+## Today
+→ [[Daily Notes/YYYY-MM-DD]] *(update the date link each day, or use the `/daily` skill)*
+
+## Tomorrow
+` ` `tasks
+not done
+due on tomorrow
+sort by priority
+group by folder
+short mode
+` ` `
+
+## This Week
+` ` `tasks
+not done
+filter by function !!(task.due.moment?.isAfter(moment().add(1, 'day'), 'day') && task.due.moment?.isSameOrBefore(moment().endOf('isoWeek'), 'day'))
+sort by priority
+group by folder
+short mode
+` ` `
+
+## Next Week
+` ` `tasks
+not done
+filter by function !!(task.due.moment?.isAfter(moment().endOf('isoWeek'), 'day') && task.due.moment?.isSameOrBefore(moment().add(1, 'week').endOf('isoWeek'), 'day'))
+sort by priority
+group by folder
+short mode
+` ` `
+
+## Future
+` ` `tasks
+not done
+filter by function !!task.due.moment?.isAfter(moment().add(1, 'week').endOf('isoWeek'), 'day')
+sort by due
+group by folder
+short mode
+` ` `
+
+## No Due Date
+` ` `tasks
+not done
+no due date
+sort by path
+group by folder
+short mode
+` ` `
+
+---
+
+## Ideas
 ```
+
+IMPORTANT: Write backticks as proper triple backticks (```), not with spaces.
+
+**Folder filtering:** If the vault contains folders with grab-and-go checklists (e.g., packing lists in a Travel folder), add `path does not include FolderName` to the "No Due Date" query to keep them from cluttering the inbox. Dated tasks from those folders won't appear here anyway since they only show up when due.
 
 ### Step 6: Create Pending View
 

@@ -11,14 +11,14 @@ A standalone guide to managing tasks in Obsidian using daily notes and the Tasks
 Instead of maintaining a separate TODO list, you write tasks directly in meeting notes, project docs, and 1:1 follow-ups. Your daily note automatically pulls them in using live query blocks. When you check off a task in the daily view, it updates the original file.
 
 ```
-Meeting Notes          Project Docs          Inbox (quick capture)
-      \                     |                     /
-       \                    |                    /
-        v                   v                   v
-           Daily Note (auto-queries all tasks)
-           - Due Today
-           - Overdue
-           - Tomorrow / This Week / Next Week / Future / No Due Date
+Meeting Notes       Project Docs       Inbox (quick capture + upcoming)
+      \                  |                  /
+       \                 |                 /
+        v                v                v
+          Daily Note — focused on today          Inbox — planning ahead
+          - Due Today / Overdue                  - Tomorrow / This Week
+          - Pending / Completed          <——>    - Next Week / Future
+                                                 - No Due Date
 ```
 
 ---
@@ -61,6 +61,7 @@ not done
 due on {{date}}
 status.name does not include Pending
 sort by priority
+short mode
 ```
 
 ## Pending (waiting on others)
@@ -68,6 +69,7 @@ sort by priority
 status.name includes Pending
 sort by priority
 group by folder
+short mode
 ```
 
 ## Overdue
@@ -76,6 +78,7 @@ not done
 due before {{date}}
 sort by priority
 group by folder
+short mode
 ```
 
 ## Quick Capture
@@ -90,48 +93,15 @@ done
 done on {{date}}
 sort by done reverse
 group by folder
+short mode
 ```
 
-## Tomorrow
-```tasks
-not done
-due on tomorrow
-sort by priority
-group by folder
-```
+---
 
-## This Week
-```tasks
-not done
-filter by function !!(task.due.moment?.isAfter(moment().add(1, 'day'), 'day') && task.due.moment?.isSameOrBefore(moment().endOf('isoWeek'), 'day'))
-sort by priority
-group by folder
-```
-
-## Next Week
-```tasks
-not done
-filter by function !!(task.due.moment?.isAfter(moment().endOf('isoWeek'), 'day') && task.due.moment?.isSameOrBefore(moment().add(1, 'week').endOf('isoWeek'), 'day'))
-sort by priority
-group by folder
-```
-
-## Future
-```tasks
-not done
-filter by function !!task.due.moment?.isAfter(moment().add(1, 'week').endOf('isoWeek'), 'day')
-sort by due
-group by folder
-```
-
-## No Due Date
-```tasks
-not done
-no due date
-sort by path
-group by folder
-```
+→ [[Inbox]] — Tomorrow / This Week / Next Week / Future / No Due Date
 ````
+
+The daily note focuses on **today** — Due, Overdue, Pending, Completed. Planning-ahead views live in Inbox.md (see Step 7).
 
 ### Step 5: Configure Daily Notes to Use the Template
 
@@ -184,16 +154,69 @@ List folders and files by name (without `.md` extension) in the order you want. 
 
 ### Step 7: Create an Inbox Note
 
-Create a note called `Inbox` in your vault root. This is your quick-capture space:
+Create a note called `Inbox` in your vault root. Inbox is both a quick-capture space and your forward-planning hub — it shows upcoming tasks that the daily note doesn't cover:
 
-```markdown
+````markdown
 # Inbox
 
 Quick capture space for tasks, thoughts, and ideas. Process these during your daily review.
 
 ---
 
+## Today
+→ [[Daily Notes/YYYY-MM-DD]]
+
+## Tomorrow
+```tasks
+not done
+due on tomorrow
+sort by priority
+group by folder
+short mode
 ```
+
+## This Week
+```tasks
+not done
+filter by function !!(task.due.moment?.isAfter(moment().add(1, 'day'), 'day') && task.due.moment?.isSameOrBefore(moment().endOf('isoWeek'), 'day'))
+sort by priority
+group by folder
+short mode
+```
+
+## Next Week
+```tasks
+not done
+filter by function !!(task.due.moment?.isAfter(moment().endOf('isoWeek'), 'day') && task.due.moment?.isSameOrBefore(moment().add(1, 'week').endOf('isoWeek'), 'day'))
+sort by priority
+group by folder
+short mode
+```
+
+## Future
+```tasks
+not done
+filter by function !!task.due.moment?.isAfter(moment().add(1, 'week').endOf('isoWeek'), 'day')
+sort by due
+group by folder
+short mode
+```
+
+## No Due Date
+```tasks
+not done
+no due date
+sort by path
+group by folder
+short mode
+```
+
+---
+
+## Ideas
+````
+
+The "Today" section links to the current daily note — update the date link each day (or let the `/daily` Claude Code skill do it for you).
 
 ---
 
@@ -292,10 +315,33 @@ Use Reading view for your daily workflow. Switch to Editing view when you need t
 
 ### End of Day (~2 min)
 1. Check off anything you completed — they move into the **Completed Today** section automatically
-2. Scroll down for the time-based breakdown: Tomorrow, This Week, Next Week, Future
+2. Open **Inbox.md** for a time-based breakdown: Tomorrow, This Week, Next Week, Future, No Due Date
 3. Optionally jot a note in the **Notes** section about what carries forward
 
 **Bonus:** Create a `Completed.md` note in your vault root for a bird's-eye view of all completed tasks across the vault, broken down by This Week / This Month / Older. Use `done after 7 days ago` date syntax in the Tasks queries.
+
+---
+
+## Folder Filtering
+
+If your vault has folders with grab-and-go checklists (e.g., packing lists in a `Travel/` folder, grocery lists, inventory), you can exclude them from task queries so they don't clutter your daily note and Inbox.
+
+Add `path does not include FolderName` to any query block:
+
+````markdown
+## No Due Date
+```tasks
+not done
+no due date
+path does not include Travel
+sort by path
+group by folder
+```
+````
+
+The most important place to add this is the **"No Due Date" query in Inbox.md** — that's where undated checklists create the most noise. You generally don't need to exclude folders from date-based queries (Due Today, Overdue, etc.) because grab-and-go items rarely have `📅` due dates.
+
+**Rule of thumb:** When adding a new folder, ask yourself whether its checkboxes are **actionable tasks** (surface in daily views) or **grab-and-go checklists** (exclude from Inbox "No Due Date"). Actionable examples: project checklists, event planning, blog post workflows. Grab-and-go examples: packing lists, shopping lists, reference checklists you complete in one sitting.
 
 ---
 
@@ -362,9 +408,11 @@ sort by due
 
 ---
 
-## The Template (Copy-Paste Ready)
+## The Templates (Copy-Paste Ready)
 
-If you want to set this up from scratch, create `Templates/Daily Note.md` with this exact content:
+### Daily Note Template
+
+Create `Templates/Daily Note.md` with this exact content:
 
 ````markdown
 # {{date}}
@@ -378,6 +426,7 @@ not done
 due on {{date}}
 status.name does not include Pending
 sort by priority
+short mode
 ```
 
 ## Pending (waiting on others)
@@ -385,6 +434,7 @@ sort by priority
 status.name includes Pending
 sort by priority
 group by folder
+short mode
 ```
 
 ## Overdue
@@ -393,6 +443,7 @@ not done
 due before {{date}}
 sort by priority
 group by folder
+short mode
 ```
 
 ## Quick Capture
@@ -407,7 +458,29 @@ done
 done on {{date}}
 sort by done reverse
 group by folder
+short mode
 ```
+
+---
+
+→ [[Inbox]] — Tomorrow / This Week / Next Week / Future / No Due Date
+````
+
+Then configure: **Settings** > **Daily notes** > Template file location > `Templates/Daily Note`
+
+### Inbox Template
+
+Create `Inbox.md` at your vault root with upcoming task queries:
+
+````markdown
+# Inbox
+
+Quick capture space for tasks, thoughts, and ideas. Process these during your daily review.
+
+---
+
+## Today
+→ [[Daily Notes/YYYY-MM-DD]]
 
 ## Tomorrow
 ```tasks
@@ -415,6 +488,7 @@ not done
 due on tomorrow
 sort by priority
 group by folder
+short mode
 ```
 
 ## This Week
@@ -423,6 +497,7 @@ not done
 filter by function !!(task.due.moment?.isAfter(moment().add(1, 'day'), 'day') && task.due.moment?.isSameOrBefore(moment().endOf('isoWeek'), 'day'))
 sort by priority
 group by folder
+short mode
 ```
 
 ## Next Week
@@ -431,6 +506,7 @@ not done
 filter by function !!(task.due.moment?.isAfter(moment().endOf('isoWeek'), 'day') && task.due.moment?.isSameOrBefore(moment().add(1, 'week').endOf('isoWeek'), 'day'))
 sort by priority
 group by folder
+short mode
 ```
 
 ## Future
@@ -439,6 +515,7 @@ not done
 filter by function !!task.due.moment?.isAfter(moment().add(1, 'week').endOf('isoWeek'), 'day')
 sort by due
 group by folder
+short mode
 ```
 
 ## No Due Date
@@ -447,9 +524,14 @@ not done
 no due date
 sort by path
 group by folder
+short mode
 ```
+
+---
+
+## Ideas
 ````
 
-Then configure: **Settings** > **Daily notes** > Template file location > `Templates/Daily Note`
+Update the `Today` link each morning with the current date, or let the `/daily` skill handle it.
 
 That's it. Open your daily note tomorrow and start writing tasks with `📅` dates. They'll show up automatically.
